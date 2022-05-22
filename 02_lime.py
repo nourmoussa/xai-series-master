@@ -36,4 +36,8 @@ lime_local = lime.explain_local(X_test[-50:],
 show(lime_local)
 
 
-# %%
+# %% Get global explanations 
+
+lime_global = lime.explain_global()
+
+show(lime_global)

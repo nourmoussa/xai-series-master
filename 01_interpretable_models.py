@@ -41,6 +41,11 @@ show(lr_local)
 lr_global = lr.explain_global(name='Logistic Regression')
 show(lr_global)
 
+# %% job lib save  - Regression model 
+joblib.dump(lr, 'reg_1.joblib')
+
+joblib_model= joblib.load('reg_1.joblib')
+
 # %% Fit decision tree model
 tree = ClassificationTree()
 tree.fit(X_train, y_train)
@@ -52,6 +57,15 @@ print(f"Accuracy {accuracy_score(y_test, y_pred)}")
 # %% Explain local prediction
 tree_local = tree.explain_local(X_test[:100], y_test[:100], name='Tree')
 show(tree_local)
+
+# %% Explain global tree prediction 
+tree_global = tree.explain_global(name='Tree')
+show(tree_global)
+
+# %% job lib save  - Regression model 
+joblib.dump(tree, 'tree.joblib')
+
+joblib_model= joblib.load('tree.joblib')
 
 # %% Fit Explainable Boosting Machine
 ebm = ExplainableBoostingClassifier(random_state=2021)
@@ -70,25 +84,27 @@ ebm_global = ebm.explain_global(name='EBM')
 show(ebm_global)
 
 # %% save the file as joblib
-#import joblib
+import joblib
 
-# from sklearn.neighbors import KNeighborsClassifier as KNN
-# knn = KNN(n_neighbors = 3)
-# # Save the model as a pickle in a file
-# joblib.dump(knn, 'filename.pkl')
+from sklearn.neighbors import KNeighborsClassifier as KNN
+knn = KNN(n_neighbors = 3)
+
+knn.fit(X_train, y_train)
+
+print("Training finished.")
+
+y_pred = knn.predict(X_test)
+print(f"F1 Score {f1_score(y_test, y_pred, average='macro')}")
+print(f"Accuracy {accuracy_score(y_test, y_pred)}")
+
+# %% Save the model as a pickle in a file
+joblib.dump(knn, 'knn.joblib')
  
-# # Load the model from the file
-# knn_from_joblib = joblib.load('filename.pkl')
+# Load the model from the file
+knn_from_joblib = joblib.load('knn.joblib')
  
-# # Use the loaded model to make predictions
-# knn_from_joblib.predict(X_test)
+# Use the loaded model to make predictions
+knn_from_joblib.predict(X_test)
 
-# # %% job lib save  - Regression model 
-# joblib.dump(LogisticRegression, 'reg_1.sav')
 
-# joblib_model= joblib.load('reg_1.sav')
-
-# %% joblib save decision trees
-joblib.dump(ClassificationTree, 'dt_1.sav')
-
-joblib_model= joblib.load('dt_1.sav')
+# %%
