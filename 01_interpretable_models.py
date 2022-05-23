@@ -20,8 +20,8 @@ X_train, X_test, y_train, y_test = data_loader.get_data_split()
 print(X_train.shape)
 print(X_test.shape)
 # Oversample the train data
-X_train, y_train = data_loader.oversample(X_train, y_train)
-print("After oversampling:", X_train.shape)
+# X_train, y_train = data_loader.oversample(X_train, y_train)
+# print("After oversampling:", X_train.shape)
 
 # %% Fit logistic regression model
 lr = LogisticRegression(random_state=2021, feature_names=X_train.columns, penalty='l1', solver='liblinear')
@@ -42,9 +42,9 @@ lr_global = lr.explain_global(name='Logistic Regression')
 show(lr_global)
 
 # %% job lib save  - Regression model 
-joblib.dump(lr, 'reg_1.joblib')
+joblib.dump(lr, 'reg_1.pkl')
 
-joblib_model= joblib.load('reg_1.joblib')
+joblib_model= joblib.load('reg_1.pkl')
 
 # %% Fit decision tree model
 tree = ClassificationTree()
