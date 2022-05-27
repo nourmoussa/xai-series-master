@@ -4,6 +4,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import f1_score, accuracy_score
 from interpret.blackbox import LimeTabular
 from interpret import show
+import joblib
 
 # %% Load and preprocess data
 data_loader = DataLoader()
@@ -38,6 +39,11 @@ show(lime_local)
 
 # %% Get global explanations 
 
-lime_global = lime.explain_global()
+# lime_global = lime.explain_global()
 
-show(lime_global)
+# show(lime_global)
+
+# %% job lib save  - LIME
+joblib.dump(lime, 'lime.pkl')
+
+joblib_model= joblib.load('lime.pkl')
