@@ -3,6 +3,14 @@ from utils import DataLoader
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import f1_score, accuracy_score
 import shap
+import joblib
+import time
+
+
+
+
+# %% 
+startTime = time.time()
 
 # %% Load and preprocess data
 data_loader = DataLoader()
@@ -22,11 +30,17 @@ y_pred = rf.predict(X_test)
 print(f"F1 Score {f1_score(y_test, y_pred, average='macro')}")
 print(f"Accuracy {accuracy_score(y_test, y_pred)}")
 
+
+# %% Save RF pkl model 
+# joblib.dump(shap, 'rf.pkl')
+
+# joblib_model= joblib.load('rf.pkl')
+
 # %% Create SHAP explainer
-explainer = shap.TreeExplainer(rf)
+explainer = shap.TreeExplainer(tree)
 # Calculate shapley values for test data
-start_index = 365
-end_index = 366
+start_index = 1
+end_index = 2
 shap_values = explainer.shap_values(X_test[start_index:end_index])
 X_test[start_index:end_index]
 
@@ -50,4 +64,14 @@ shap.force_plot(explainer.expected_value[1],
 shap.summary_plot(shap_values, X_test)
 
 
-# %%
+# %% job lib save  - SHAP
+# joblib.dump(shap, 'shap.pkl')
+
+# joblib_model= joblib.load('shap.pkl')
+
+# %% 
+
+executionTime = (time.time() - startTime)
+print('Execution time in seconds: ' + str(executionTime))
+
+

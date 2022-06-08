@@ -41,10 +41,11 @@ explainer = dice_ml.Dice(data_dice,
 
 # %% Create explanation
 # Generate CF based on the blackbox model
-input_datapoint = X_test[363:366]
+input_datapoint = X_test[418:349]
 cf = explainer.generate_counterfactuals(input_datapoint, 
                                   total_CFs=3, 
-                                  desired_class="opposite")
+                                  desired_class="opposite",
+                                  features_to_vary=['weight','active','smoke','alco'])
 # Visualize it
 cf.visualize_as_dataframe(show_only_changes=True)
 
@@ -53,7 +54,7 @@ cf.visualize_as_dataframe(show_only_changes=True)
 features_to_vary=['weight']
 discount = 0.9
 discount = 0.95
-permitted_range={'weight':[50,80]}
+permitted_range={'weight':[70,80]}
 # Now generating explanations using the new feature weights
 cf = explainer.generate_counterfactuals(input_datapoint, 
                                   total_CFs=3, 
@@ -62,6 +63,7 @@ cf = explainer.generate_counterfactuals(input_datapoint,
                                   features_to_vary=features_to_vary)
 # Visualize it
 cf.visualize_as_dataframe(show_only_changes=True)
+
 
 
 # %%

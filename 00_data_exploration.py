@@ -64,49 +64,49 @@ df_clean.groupby("active").mean()
 # %%
 import plotly.express as px
 
-df_sub2 = df_clean[['age', 'ap_hi', 'cholesterol', 'ap_lo','weight', 'cardio']]
+df_sub2 = df_clean[['age', 'cholesterol','height','ap_hi', 'ap_lo','weight', 'cardio',]]
 #Normalizing the data
 df_normalized2 = (df_sub2-df_sub2.mean())/(df_sub2.std())
 df_normalized2.cardio = df_sub2.cardio
 df_normalized2.cholesterol = df_normalized2.cholesterol+np.random.rand(*df_normalized2.cholesterol.shape)/2
 df_normalized2.ap_hi = df_normalized2.ap_hi+np.random.rand(*df_normalized2.ap_hi.shape)/2
 
-fig = px.parallel_coordinates(df_sub2, color='cardio', labels={"age": "Age", "ap_hi": "High Blood Pressure Value", "cholesterol": "Cholesterol", 
+fig = px.parallel_coordinates(df_sub2, color='cardio', labels={"age": "Age", "cholesterol": "Cholesterol","height": "Height", "ap_hi": "High Blood Pressure Value",
                "ap_lo": "Low Blood Pressure Value", "weight": "Weight", "cardio": "Cardiovascular Disease"},
                              color_continuous_scale=px.colors.diverging.Tealrose,
                              color_continuous_midpoint=1)
 fig.show()
-# # %%
-# import plotly.express as px
+# %%
+import plotly.express as px
 
-# df_sub2 = df_clean[['age', 'weight', 'smokee', 'alco', 'active', 'cardio']]
-# #Normalizing the data
-# df_normalized2 = (df_sub2-df_sub2.mean())/(df_sub2.std())
-# df_normalized2.cardio = df_sub2.cardio
-# #df_normalized2.cholesterol = df_normalized2.cholesterol+np.random.rand(*df_normalized2.cholesterol.shape)/2
-# #df_normalized2.ap_hi = df_normalized2.ap_hi+np.random.rand(*df_normalized2.ap_hi.shape)/2
+df_sub2 = df_clean[['age', 'weight','height', 'smoke', 'alco', 'active', 'cardio']]
+#Normalizing the data
+df_normalized2 = (df_sub2-df_sub2.mean())/(df_sub2.std())
+df_normalized2.cardio = df_sub2.cardio
+#df_normalized2.cholesterol = df_normalized2.cholesterol+np.random.rand(*df_normalized2.cholesterol.shape)/2
+#df_normalized2.ap_hi = df_normalized2.ap_hi+np.random.rand(*df_normalized2.ap_hi.shape)/2
 
-# fig = px.parallel_coordinates(df_sub2, color='cardio', labels={"age": "Age", "weight": "Weight", "smoke": "Smoke", "alco": "Alcohol consumption","active": "Active", "cardio": "Cardiovascular Disease"},
-#                              color_continuous_scale=px.colors.diverging.Tealrose,
-#                              color_continuous_midpoint=1)
-# fig.show()
+fig = px.parallel_coordinates(df_sub2, color='cardio', labels={"age": "Age", "weight": "Weight","height": "Height", "smoke": "Smoke", "alco": "Alcohol consumption","active": "Active", "cardio": "Cardiovascular Disease"},
+                             color_continuous_scale=px.colors.diverging.Tealrose,
+                             color_continuous_midpoint=1)
+fig.show()
 
 # %%
-from pandas.plotting import parallel_coordinates
+# from pandas.plotting import parallel_coordinates
 
 
-#df_sub2 = df_clean[['age', 'weight', 'cholesterol', 'ap_hi', 'cardio', 'ap_lo']]
+# #df_sub2 = df_clean[['age', 'weight', 'cholesterol', 'ap_hi', 'cardio', 'ap_lo']]
 
-df_sub = df_clean[['age', 'weight', 'cholesterol', 'ap_hi', 'ap_lo', 'cardio']].copy()
-df_sub.cardio = df_sub.cardio=='1' 
-#normalizing values
-df_normalized = (df_sub-df_sub.mean())/(df_sub.std())
-df_normalized.cardio = df_sub.cardio
-df_normalized.cholesterol = df_normalized.cholesterol+np.random.rand(*df_normalized.cholesterol.shape)/2
-df_normalized.ap_hi = df_normalized.ap_hi+np.random.rand(*df_normalized.ap_hi.shape)/2
+# df_sub = df_clean[['age', 'weight', 'cholesterol', 'ap_hi', 'ap_lo', 'cardio', 'height']].copy()
+# df_sub.cardio = df_sub.cardio=='1' 
+# #normalizing values
+# df_normalized = (df_sub-df_sub.mean())/(df_sub.std())
+# df_normalized.cardio = df_sub.cardio
+# df_normalized.cholesterol = df_normalized.cholesterol+np.random.rand(*df_normalized.cholesterol.shape)/2
+# df_normalized.ap_hi = df_normalized.ap_hi+np.random.rand(*df_normalized.ap_hi.shape)/2
 
 
-parallel_coordinates(df_normalized,'cardio')
+# parallel_coordinates(df_normalized,'cardio')
 
-plt.show()
+# plt.show()
 # %%
