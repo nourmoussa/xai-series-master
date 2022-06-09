@@ -29,10 +29,10 @@ class DataLoader():
         
         # Drop id as it is not relevant
         self.data.drop(["id"], axis=1, inplace=True)
-        self.data.drop(["ap_lo"], axis=1, inplace=True)
-        self.data.drop(["ap_hi"], axis=1, inplace=True)
-        self.data.drop(["cholesterol"], axis=1, inplace=True)
-        self.data.drop(["gluc"], axis=1, inplace=True)
+        # self.data.drop(["ap_lo"], axis=1, inplace=True)
+        # self.data.drop(["ap_hi"], axis=1, inplace=True)
+        # self.data.drop(["cholesterol"], axis=1, inplace=True)
+        # self.data.drop(["gluc"], axis=1, inplace=True)
 
     def get_data_split(self):
         X = self.data.iloc[:,:-1]
@@ -49,5 +49,7 @@ class DataLoader():
         x_over = pd.DataFrame(x_np, columns=X_train.columns)
         y_over = pd.Series(y_np, name=y_train.name)
         return x_over, y_over
+
+
 
 
